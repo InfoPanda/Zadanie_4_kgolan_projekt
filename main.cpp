@@ -26,17 +26,34 @@ int main(int argc, char * argv[])
         saveLog("User did not provide path to the files.");
         saveLog("Creating the test files for user...");
         //test 1
-        createFile1("test1_file1.bin", 100, 0xFF); //1111 1111
-        createFile1("test1_file2.bin", 100, 0xFE); //1111 1110
-        //test 2
-        
-        /*
-            missing function to change 10 bits in the file
-        */
 
-        //test 3
-        //createFile1("test3_file1.bin",400000000,0x55); 
-        //createFile1("test3_file2.bin",400000000,0x50);
+        int chose;
+        std::cin >> chose;
+
+        switch (chose) {
+            //test 1
+        case 1:
+        {
+            createFile1("t1_plik1.bin", 100, 0x55); //1111 1111
+            createFile1("t1_plik2.bin", 100, 0x55); //1111 1110
+            break;
+        }
+        //test 2
+        case 2:
+        {
+            createFile1("t2_plik1.bin", 100, 0xFF); //1111 1111
+            createFile1("t2_plik2.bin", 100, 0xFE); //1111 1110
+            break;
+        }
+        //test3
+        case 3:
+        {
+
+            createFile1("t3_plik1.bin", 409600000, 0x55);
+            createFile1("t3_plik2.bin", 409600000, 0x50);
+            break;
+        }
+        }
         saveLog("Test files are prepared");
         saveLog("Re-run with correct arguments ie: ./task_iv_ber.exe test1_file1.bin test1_file2.bin");
     }
@@ -72,7 +89,7 @@ void createFile1(const std::string name, const int count, const char value)
     f.open(name.c_str(), std::ios::binary | std::ios::out);
     for (int i = 0; i < count; i++)
     {
-        f.write((char*)&value,1);
+        f.write((char*)&value,sizeof(char));
     }
     f.close();
 }
