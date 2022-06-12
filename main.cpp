@@ -26,36 +26,53 @@ int main(int argc, char * argv[])
         saveLog("User did not provide path to the files.");
         saveLog("Creating the test files for user...");
         //test 1
+        bool repeat = true;
 
-        int chose;
-        std::cin >> chose;
+        while (repeat)
+        { 
+            std::cout << "Number Test - 1, 2, 3, Exit - 4"<<std::endl;
+            int choose;
+            std::cin >> choose;
+            switch (choose) {
+                //test 1
+            case 1:
+            {
+                createFile1("t1_plik1.bin", 100, 0x55); //1111 1111
+                createFile1("t1_plik2.bin", 100, 0x55); //1111 1110
+                results = calculateBer("t1_plik1.bin", "t1_plik2.bin");
+                printResult(results);
+                break;
+            }
+            //test 2
+            case 2:
+            {
+                createFile1("t2_plik1.bin", 100, 0xFF); //1111 1111
+                createFile1("t2_plik2.bin", 100, 0xFE); //1111 1110
+                results = calculateBer("t2_plik1.bin", "t2_plik2.bin");
+                printResult(results);
+                break;
+            }
+            //test3
+            case 3:
+            {
 
-        switch (chose) {
-            //test 1
-        case 1:
-        {
-            createFile1("t1_plik1.bin", 100, 0x55); //1111 1111
-            createFile1("t1_plik2.bin", 100, 0x55); //1111 1110
-            break;
-        }
-        //test 2
-        case 2:
-        {
-            createFile1("t2_plik1.bin", 100, 0xFF); //1111 1111
-            createFile1("t2_plik2.bin", 100, 0xFE); //1111 1110
-            break;
-        }
-        //test3
-        case 3:
-        {
+                createFile1("t3_plik1.bin", 409600000, 0x55);
+                createFile1("t3_plik2.bin", 409600000, 0x50);
+                results = calculateBer("t3_plik1.bin", "t3_plik2.bin");
+                printResult(results);
+                break;
+            }
+            case 4:
+            {
+                repeat = false;
+                break;
 
-            createFile1("t3_plik1.bin", 409600000, 0x55);
-            createFile1("t3_plik2.bin", 409600000, 0x50);
-            break;
-        }
+            }
+            }
+
         }
         saveLog("Test files are prepared");
-        saveLog("Re-run with correct arguments ie: ./task_iv_ber.exe test1_file1.bin test1_file2.bin");
+        saveLog("Re-run with correct arguments ie: ./task_iv_ber.exe t1_plik1.bin t1_plik2.bin");
     }
     else //arguments are passed correctly
     {
