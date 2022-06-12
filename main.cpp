@@ -56,8 +56,8 @@ int main(int argc, char * argv[])
             case 3:
             {
 
-                createFile1("t3_plik1.bin", 409600000, 0x55);
-                createFile1("t3_plik2.bin", 409600000, 0x50);
+                createFile1("t3_plik1.bin", 400000000, 0x55);
+                createFile1("t3_plik2.bin", 400000000, 0x50);
                 results = calculateBer("t3_plik1.bin", "t3_plik2.bin");
                 printResult(results);
                 break;
